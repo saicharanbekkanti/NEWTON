@@ -293,6 +293,7 @@ interface MultimodalInputProps {
     canSend: boolean;
     className?: string;
     selectedVisibilityType: VisibilityType;
+    placeholder?: string;
 }
 
 function PureMultimodalInput({
@@ -306,6 +307,7 @@ function PureMultimodalInput({
     canSend,
     className,
     selectedVisibilityType,
+    placeholder = "Explore the financial evidence...",
 }: MultimodalInputProps) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -404,7 +406,7 @@ function PureMultimodalInput({
                 <Textarea
                     data-testid="multimodal-input"
                     ref={textareaRef}
-                    placeholder="Ask anything about your data..."
+                    placeholder={placeholder}
                     value={input}
                     onChange={handleInput}
                     className={cn(

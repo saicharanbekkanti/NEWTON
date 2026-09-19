@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Sparkles } from 'lucide-react';
 
 // --- HELPER COMPONENTS (ICONS) ---
 
@@ -32,6 +32,7 @@ interface SignInPageProps {
     onGoogleSignIn?: () => void;
     onResetPassword?: () => void;
     onCreateAccount?: () => void;
+    onGuestSignIn?: () => void;
     initialMode?: 'signin' | 'signup';
     isLoading?: boolean;
 }
@@ -66,6 +67,7 @@ export const SignInPage: React.FC<SignInPageProps> = ({
     onSignUp,
     onGoogleSignIn,
     onResetPassword,
+    onGuestSignIn,
     initialMode = 'signin',
     isLoading = false,
 }) => {
@@ -164,6 +166,18 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                             <GoogleIcon />
                             <span>Continue with Google</span>
                         </button>
+
+                        {onGuestSignIn && (
+                            <button
+                                type="button"
+                                disabled={isLoading}
+                                onClick={onGuestSignIn}
+                                className={`animate-element ${isSignIn ? 'animate-delay-800' : 'animate-delay-900'} w-full flex items-center justify-center gap-3 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-emerald-500/10 border border-indigo-500/30 hover:border-indigo-500/60 rounded-2xl py-3.5 hover:bg-indigo-500/15 text-indigo-300 dark:text-indigo-200 transition-all font-semibold text-sm ${isLoading ? 'opacity-50 cursor-not-allowed' : 'active:scale-[0.98]'}`}
+                            >
+                                <Sparkles className="w-4 h-4 text-indigo-400" />
+                                <span>Explore Demo Mode (Instant Access)</span>
+                            </button>
+                        )}
 
                         <p className={`animate-element ${isSignIn ? 'animate-delay-900' : 'animate-delay-1000'} text-center text-sm text-muted-foreground `}>
                             {isSignIn ? (

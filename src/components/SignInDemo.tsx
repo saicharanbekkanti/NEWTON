@@ -14,28 +14,28 @@ import { motion } from "framer-motion";
 
 const sampleTestimonials: Testimonial[] = [
     {
-        avatarSrc: "https://randomuser.me/api/portraits/women/57.jpg",
-        name: "Sarah Chen",
-        handle: "@sarahdigital",
-        text: "Amazing platform! The user experience is seamless and the features are exactly what I needed."
+        avatarSrc: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+        name: "Sunita Sharma",
+        handle: "@sunita_retail",
+        text: "Without a formal credit score, banks rejected our working capital requests for years. CREDENCE verified our daily UPI cash flows in 48 hours."
     },
     {
-        avatarSrc: "https://randomuser.me/api/portraits/men/64.jpg",
-        name: "Marcus Johnson",
-        handle: "@marcustech",
-        text: "This service has transformed how I work. Clean design, powerful features, and excellent support."
+        avatarSrc: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+        name: "Rajesh Kulkarni",
+        handle: "@rajesh_logistics",
+        text: "As a fleet driver, my income spans multiple delivery platforms. CREDENCE turned my transaction consistency into verified evidence lenders trusted."
     },
     {
-        avatarSrc: "https://randomuser.me/api/portraits/men/32.jpg",
-        name: "David Martinez",
-        handle: "@davidcreates",
-        text: "I've tried many platforms, but this one stands out. Intuitive, reliable, and genuinely helpful for productivity."
+        avatarSrc: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+        name: "Anand Verma",
+        handle: "@verma_dairy",
+        text: "The Evidence Vault made our utility payments and recurring supplier invoice history transparent. We secured growth financing on our actual merit."
     },
 ];
 
 const SignInPageDemo = () => {
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, signInAsGuest } = useAuth();
     const [error, setError] = useState<string | null>(null);
     const [isSigningIn, setIsSigningIn] = useState(false);
 
@@ -46,6 +46,11 @@ const SignInPageDemo = () => {
             navigate("/dashboard");
         }
     }, [user, navigate]);
+
+    const handleGuestSignIn = () => {
+        signInAsGuest();
+        navigate("/dashboard");
+    };
 
     const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -140,6 +145,7 @@ const SignInPageDemo = () => {
                 onSignUp={handleSignUp}
                 onGoogleSignIn={handleGoogleSignIn}
                 onResetPassword={handleResetPassword}
+                onGuestSignIn={handleGuestSignIn}
                 isLoading={isSigningIn}
             />
             {error && (

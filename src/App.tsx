@@ -12,7 +12,7 @@ import { ThemeProvider } from './lib/ThemeContext';
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="insightra-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="credence-theme">
       <AuthProvider>
         <Router>
           <Routes>

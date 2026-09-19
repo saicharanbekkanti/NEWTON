@@ -13,11 +13,12 @@ import {
     Bot,
     Sun,
     Moon,
-    ChevronLeft
+    ChevronLeft,
+    History,
+    ShieldCheck
 } from "lucide-react";
 import { useAuth } from "@/lib/AuthContext";
 import { useTheme } from "@/lib/ThemeContext";
-import { auth } from "@/lib/firebase";
 import { cn } from "@/lib/utils";
 
 interface SidebarProps {
@@ -45,35 +46,37 @@ const AnimatedMenuToggle = ({
 
 const Sidebar = ({ activeTab, setActiveTab, isCollapsed = false, setIsCollapsed = () => { } }: SidebarProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const { theme, setTheme } = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
 
     const handleLogout = async () => {
         try {
-            // Navigate first to prevent ProtectedRoute from redirecting elsewhere
             navigate('/', { replace: true });
-            await auth.signOut();
+            await logout();
         } catch (error) {
             console.error("Logout error:", error);
-            // Fallback for extreme cases
             window.location.href = '/';
         }
     };
 
     const menuItems = [
         { id: 'dashboard', label: 'Overview', icon: <LayoutDashboard className="w-5 h-5" />, path: '/dashboard' },
-        { id: 'chat', label: 'AI Analyst', icon: <Bot className="w-5 h-5" />, path: '/chat' },
-        { id: 'insights', label: 'Intelligence', icon: <Zap className="w-5 h-5 font-bold" />, path: '/insights' },
-        { id: 'reports', label: 'Archives', icon: <Layers className="w-5 h-5" />, path: '/dashboard' },
-        { id: 'upload', label: 'Upload Feed', icon: <UploadCloud className="w-5 h-5" />, path: '/dashboard' },
+        { id: 'score', label: 'CREDENCE Score', icon: <ShieldCheck className="w-5 h-5 text-indigo-400" />, path: '/dashboard?tab=score' },
+        { id: 'reports', label: 'Financial Identity', icon: <Layers className="w-5 h-5" />, path: '/dashboard?tab=reports' },
+        { id: 'insights', label: 'Evidence Intelligence', icon: <Zap className="w-5 h-5 font-bold" />, path: '/insights' },
+        { id: 'continuity', label: 'Score Evolution', icon: <History className="w-5 h-5" />, path: '/dashboard?tab=continuity' },
+        { id: 'upload', label: 'Data Sources', icon: <UploadCloud className="w-5 h-5" />, path: '/dashboard?tab=upload' },
+        { id: 'chat', label: 'Financial Guide', icon: <Bot className="w-5 h-5" />, path: '/chat' },
     ];
 
     const currentPath = location.pathname;
 
     const handleNav = (item: any) => {
-        if (item.path !== currentPath) {
+        const [targetPath, queryString] = item.path.split('?');
+        const targetSearch = queryString ? `?${queryString}` : '';
+        if (currentPath !== targetPath || location.search !== targetSearch) {
             navigate(item.path);
         }
         setActiveTab(item.id);
@@ -179,7 +182,7 @@ const SidebarContent = ({ user, activeTab, onNav, menuItems, onLogout, theme, se
                         animate={{ opacity: 1, x: 0 }}
                         className="min-w-0 pr-2"
                     >
-                        <p className="font-outfit font-black text-slate-900 dark:text-white truncate text-xs tracking-tight">{user?.displayName || 'Insightra User'}</p>
+                        <p className="font-outfit font-black text-slate-900 dark:text-white truncate text-xs tracking-tight">{user?.displayName || 'Credence User'}</p>
                         <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 truncate uppercase tracking-widest">{user?.email ? 'PRO ACCOUNT' : 'GUEST'}</p>
                     </motion.div>
                 )}
@@ -198,7 +201,7 @@ const SidebarContent = ({ user, activeTab, onNav, menuItems, onLogout, theme, se
                     className="flex items-center gap-2"
                 >
                     <span className="font-outfit font-black text-xl tracking-tighter text-slate-900 dark:text-white uppercase">
-                        In<span className="text-indigo-600 dark:text-indigo-400">sight</span>ra
+                        CRED<span className="text-indigo-600 dark:text-indigo-400">ENCE</span>
                     </span>
                 </motion.div>
             )}

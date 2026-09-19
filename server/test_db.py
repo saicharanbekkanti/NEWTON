@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
-DATABASE_NAME = os.getenv("DATABASE_NAME", "InsightAI")
+DATABASE_NAME = os.getenv("DATABASE_NAME", "CredenceAI")
 
 async def test_conn():
     print(f"Testing connection to: {MONGO_URI}")

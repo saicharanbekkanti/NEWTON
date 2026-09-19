@@ -2,12 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// @ts-ignore
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-// @ts-ignore
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-// @ts-ignore
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -439,15 +436,15 @@ export const HorizonHero = () => {
     }, [totalSections, isReady]);
 
     const titles: Record<number, string> = {
-        0: 'INSIGHTRA',
-        1: 'InnovMinati',
-        2: 'INSIGHTRA'
+        0: 'CREDENCE',
+        1: 'CREDENCE SCORE',
+        2: 'CREDENCE'
     };
 
     const subtitles: Record<number, { line1: string, line2: string }> = {
-        0: { line1: 'Where numbers find meaning,', line2: 'And vision turns actionable' },
-        1: { line1: 'Beyond the boundaries of imagination,', line2: 'lies the universe of possibilities' },
-        2: { line1: 'In the space between thought and creation,', line2: 'we find the essence of true innovation' }
+        0: { line1: 'WHERE FINANCIAL BEHAVIOUR BECOMES CREDIBILITY.', line2: 'TRANSFORMING REAL ACTIVITY INTO EXPLAINABLE CREDIT IDENTITY.' },
+        1: { line1: "We don't just produce a score.", line2: 'We show the evidence behind it.' },
+        2: { line1: 'Alternative Financial Credibility Assessment', line2: 'for credit-invisible individuals and micro-enterprises.' }
     };
 
     return (
@@ -591,7 +588,7 @@ export const HorizonHero = () => {
 
                 <div className="hero-content cosmos-content">
                     <h1 ref={titleRef} className="hero-title">
-                        {titles[currentSection] || 'INSIGHTRA'}
+                        {titles[currentSection] || 'CREDENCE'}
                     </h1>
                     <div ref={subtitleRef} className="hero-subtitle cosmos-subtitle">
                         <p className="subtitle-line">{subtitles[currentSection]?.line1}</p>

@@ -1,7 +1,7 @@
 services:
   # Backend
   - type: web
-    name: insightra-backend
+    name: credence-backend
     env: python
     buildCommand: pip install -r server/requirements.txt
     startCommand: gunicorn -k uvicorn.workers.UvicornWorker server.main:app --bind 0.0.0.0:$PORT --timeout 120
