@@ -309,6 +309,17 @@ export interface DataQualityReport {
     issues: string[];
 }
 
+export interface CredenceApplicantProfile {
+    id: string;
+    name: string;
+    businessName: string;
+    location: string;
+    category: string;
+    bureauStatus: string;
+    observationPeriod: string;
+    dataSources: string[];
+}
+
 // -----------------------------------------------------------------------------
 // CANONICAL DEMO PROFILE: SAI CHARAN (APMC MANDI VEGETABLE VENDOR)
 // -----------------------------------------------------------------------------
